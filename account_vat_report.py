@@ -121,7 +121,7 @@ class account_vat_ledger(models.Model):
             invoices_domain = [
                 # cancel invoices with internal number are invoices
                 ('state', '!=', 'draft'),
-                ('document_number', '!=', False),
+                ('l10n_latam_document_number', '!=', False),
                 # ('internal_number', '!=', False),
                 ('journal_id', 'in', self.journal_ids.ids),
                 ('date', '>=', self.date_from),
@@ -130,7 +130,7 @@ class account_vat_ledger(models.Model):
             invoices = self.env['account.move'].search(
                 # TODO, tal vez directamente podemos invertir el orden, como?
                 invoices_domain,
-                order='invoice_date asc, document_number asc, id asc')
+                order='invoice_date asc, l10n_latam_document_number asc, id asc')
         else:
             invoices_domain = [
                 # cancel invoices with internal number are invoices
