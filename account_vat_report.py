@@ -242,10 +242,10 @@ class AccountVatLedgerXlsx(models.AbstractModel):
                 other_taxes_amount = 0
                 vat_amount = 0
                 for move_tax in obj.move_tax_ids:
-                    if move_tax.tax_id.tax_group_id.tax_type == 'vat' and move_tax.tax_id.tax_group_id.l10n_ar_vat_afip_code != '2':
+                    if move_tax.tax_id.tax_group_id.account_tax_type == 'vat' and move_tax.tax_id.tax_group_id.l10n_ar_vat_afip_code != '2':
                         vat_taxable_amount += move_tax.base_amount
                         vat_amount += move_tax.tax_amount
-                    elif move_tax.tax_id.tax_group_id.tax_type == 'vat' and move_tax.tax_id.tax_group_id.l10n_ar_vat_afip_code == '2':
+                    elif move_tax.tax_id.tax_group_id.account_tax_type == 'vat' and move_tax.tax_id.tax_group_id.l10n_ar_vat_afip_code == '2':
                         vat_exempt_base_amount += move_tax.base_amount
                     else:
                         other_taxes_amount += move_tax.tax_amount
