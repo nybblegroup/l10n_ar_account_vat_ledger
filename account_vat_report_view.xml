@@ -6,13 +6,13 @@
             <field name='name'>Account VAT Ledger</field> 
             <field name="model">account.vat.ledger</field>
             <field name='arch' type='xml'>
-                <tree string="VAT Ledger">
+                <list string="VAT Ledger">
                     <field name="name"/>
                     <field name="company_id" groups="base.group_multi_company"/>
                     <field name="date_from"/>
                     <field name="date_to"/>
                     <field name="state"/>
-                </tree>
+                </list>
             </field>
         </record>
 
@@ -23,9 +23,9 @@
 		<form string="VAT Ledger">
 		    <field name="type" invisible="1"/>
                     <header>
-                        <button name="action_present" string="Present" states="draft" type="object" class="oe_highlight"/>
-                        <button name="action_cancel" string="Cancel" states="draft,presented" type="object"/>
-                        <button name="action_to_draft" string="To Draft" states="cancel" type="object"/>
+                        <button name="action_present" string="Present" invisible="state != 'draft'" type="object" class="oe_highlight"/>
+                        <button name="action_cancel" string="Cancel" invisible="state not in ('draft', 'presented')" type="object"/>
+                        <button name="action_to_draft" string="To Draft" invisible="state != 'cancel'" type="object"/>
                         <field name="state" widget="statusbar" statusbar_visible="draft,presented"/>
                     </header>
                     <sheet>
